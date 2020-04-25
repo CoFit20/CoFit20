@@ -5,6 +5,7 @@
 ```
 git clone https://github.com/sfechner/CoFit20.git
 pip install poetry
+cd CoFit20
 cd flask-app
 poetry install
 poetry run python main.py
