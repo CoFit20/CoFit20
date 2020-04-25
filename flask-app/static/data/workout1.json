@@ -1,10 +1,10 @@
 {
-  "startTime": "2020-04-24T19:27:00-07:00",
+  "startTime": "now",
   "elements": [{
       "id": 0,
       "heading": "Wait for Next Workout Session",
       "name": "Get ready for the next class",
-      "duration": 120,
+      "duration": 5,
       "gifpath": ""
     }, {
       "id": 1,
