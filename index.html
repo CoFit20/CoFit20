@@ -12,11 +12,14 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-
+    <!-- CDN example (unpkg) -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
+    <script>dayjs.extend(window.dayjs_plugin_utc)</script>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="./static//css/cover.css">
+    <link rel="stylesheet" href="./static/css/cover.css">
 
 
 </head>
@@ -36,21 +39,29 @@
     </header>
 
     <main role="main" class="inner cover">
-        <h3 id="heading"></h3>
-
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="false">
-            <div class="carousel-inner">
-
+        <div class="cover-container">
+            <div class="row">
+                <div class="card-group col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Private</h5>
+                            <a href="workout.html" class="btn btn-primary m-3">Surprise</a>
+                            <a href="#" class="btn btn-primary">Create your own workout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Shared</h5>
+                            <a id="next-0" class="btn btn-primary p-3 m-3">Go somewhere</a>
+                            <a id="next-1" class="btn btn-primary p-3 m-3">Go somewhere</a>
+                            <a id="next-2" class="btn btn-primary p-3 m-3">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+            </div>
 
     </main>
 
@@ -71,7 +82,38 @@
 <script src="./static//libs/easytimer.min.js"></script>
 <script type="text/javascript" src="./static//libs/jquery.plugin.js"></script>
 <script type="text/javascript" src="./static//libs/jquery.countdown.js"></script>
-<script type="text/javascript" src="./static/js/main.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var next_monday = new Date();
+        next_monday.setDate(next_monday.getDate() + (1 + 7 - next_monday.getDay()) % 7);
+        console.log(next_monday);
+        var next_wednesday = new Date();
+        next_wednesday.setDate(next_wednesday.getDate() + (3 + 7 - next_wednesday.getDay()) % 7);
+        console.log(next_wednesday);
+        var next_friday = new Date();
+        next_friday.setDate(next_friday.getDate() + (5 + 7 - next_friday.getDay()) % 7);
+        console.log(next_friday);
+
+        var time_list = [next_monday,next_wednesday,next_friday]
+        time_list.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
+        console.log(time_list)
+        $.each(time_list, function (idx,time) {
+            time.setHours(11)
+            time.setMinutes(0)
+            time.setSeconds(0)
+            $("#next-"+idx).text(dayjs(time).toString()).click(function(){console.log(time)});
+            $("#next-"+idx).attr('href','workout.html?timestamp='+time.toISOString())
+        });
+
+    });
+
+    function createJsonForTimestamp(timestamp) {
+
+    }
+
+
+</script>
 
 </body>
 </html>
