@@ -1,9 +1,16 @@
 var sequence = []
 var counter = 0;
 $(document).ready(function(){
-
+    var workoutFile = "";
+    let searchParams = new URLSearchParams(window.location.search)
+    if(searchParams.has('workout')) {
+        workoutFile = searchParams.get('workout');
+    }else{
+        console.log("Could not find workout in URL Use default workout1.json")
+        workoutFile = "workout1.json"
+    }
     //console.log(jsonObject);
-    fetch('./static/data/workout1.json')
+    fetch('./static/data/'+workoutFile)
         .then((response) => {
             return response.json();
         })

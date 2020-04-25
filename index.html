@@ -18,9 +18,11 @@
     <script>dayjs.extend(window.dayjs_plugin_utc)</script>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link
+            href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+            rel="stylesheet"  type='text/css'>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="./static/css/cover.css">
-
 
 </head>
 
@@ -29,12 +31,7 @@
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column  w-75 ">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">Cover</h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Contact</a>
-            </nav>
+            <h1 class="masthead-brand"><a  href="#">Cover</a></h1>
         </div>
     </header>
 
@@ -43,20 +40,36 @@
             <div class="row">
                 <div class="card-group col-sm-6">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Private</h5>
-                            <a href="workout.html" class="btn btn-primary m-3">Surprise</a>
-                            <a href="#" class="btn btn-primary">Create your own workout</a>
+                        <div class="card-body" style="background-color: #555;">
+                            <h3 class="card-title font-weight-bold">Private</h3>
+                            <a href="workout.html?workout=workout1.json" class="btn btn-primary m-3">Workout 1</a>
+                            <a href="workout.html?workout=workout2.json" class="btn btn-primary m-3">Workout 2</a>
+                            <a href="workout.html?workout=workout3.json" class="btn btn-primary m-3">Workout 3</a>
+                            <a href="#" class="btn btn-primary m-3">Create your own workout</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Shared</h5>
-                            <a id="next-0" class="btn btn-primary p-3 m-3">Go somewhere</a>
-                            <a id="next-1" class="btn btn-primary p-3 m-3">Go somewhere</a>
-                            <a id="next-2" class="btn btn-primary p-3 m-3">Go somewhere</a>
+                        <div class="card-body" style="background-color: #555;">
+                            <h3 class="card-title font-weight-bold">Shared</h3>
+
+                            <div class=" p-3 m-3"><a id="next-0" class="btn btn-primary">Go somewhere</a><a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                                <a href="#" class="fa fa-linkedin"></a>
+                                <a href="#" class="fa fa-youtube"></a>
+                                <a href="#" class="fa fa-instagram"></a></div>
+                        <div class=" p-3 m-3"><a id="next-1" class="btn btn-primary">Go somewhere</a>                                <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-google"></a>
+                            <a href="#" class="fa fa-linkedin"></a>
+                            <a href="#" class="fa fa-youtube"></a>
+                            <a href="#" class="fa fa-instagram"></a></div>
+                        <div class=" p-3 m-3"><a id="next-2" class="btn btn-primary">Go somewhere</a>                                <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-google"></a>
+                            <a href="#" class="fa fa-linkedin"></a>
+                            <a href="#" class="fa fa-youtube"></a>
+                            <a href="#" class="fa fa-instagram"></a></div>
                         </div>
                     </div>
                 </div>

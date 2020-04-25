@@ -49,7 +49,7 @@
     {
       "id": 7,
       "heading": "Workout Time",
-      "name": "Crunches",
+      "name": "Fast Feet & Jump",
       "duration": 40,
       "gifpath": "static/movie/Crunches.mp4"
 },
@@ -63,7 +63,7 @@
     {
       "id": 9,
       "heading": "Workout Time",
-      "name": "Burpees",
+      "name": "Inner Sole Tap",
       "duration": 40,
       "gifpath": "static/movie/Crunches.mp4"
 },
@@ -78,7 +78,7 @@
     {
       "id": 11,
       "heading": "Workout Time",
-      "name": "Mountain Climber",
+      "name": "Squat & Knee Tap",
       "duration": 40,
       "gifpath": "static/movie/Plank.mp4"
     },
@@ -93,7 +93,7 @@
     {
       "id": 13,
       "heading": "Workout Time",
-      "name": "Sumo Squat",
+      "name": "Frog Squats",
       "duration": 40,
       "gifpath": "static/movie/Crunches.mp4"
 },
@@ -107,7 +107,7 @@
     {
       "id": 15,
       "heading": "Workout Time",
-      "name": "Jumping Lunges",
+      "name": "10 High Knee & 3 Tuck Jumps",
       "duration": 40,
       "gifpath": "static/movie/Crunches.mp4"
 },
@@ -121,7 +121,7 @@
     {
       "id": 17,
       "heading": "Workout Time",
-      "name": "Push Up",
+      "name": "Crunches",
       "duration": 40,
       "gifpath": "static/movie/PushUp.mp4"
 },
