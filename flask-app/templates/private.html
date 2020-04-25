@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('.static', filename='css/jquery.plugin.js')}}">
+</head>
+<body>
+
+
+
+<div id="startTimer"></div>
+<div id="endTimer"></div>
+<div id="Timers"></div>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="{{url_for('.static', filename='libs/countdown.js')}}"></script>
+<script src="{{url_for('.static', filename='libs/date.js')}}"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://use.ntpjs.org/ntp.js" async defer></script>
+<script type="text/javascript" src="{{url_for('.static', filename='libs/jquery.plugin.js')}}"></script>
+<script type="text/javascript" src="{{url_for('.static', filename='libs/jquery.countdown.js')}}"></script>
+<script>
+    $(document).ready(function() {
+
+        fetch(`${window.origin}/getWorkoutsPrivate`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                parseResults(data)
+            });
+    });
+
+
+    function parseResults(data) {
+        console.log(data);
+        var startTime = null;
+        if(data['startTime'] == "now"){
+            startTime = dayjs(Date.now())}
+        else{
+            startTime = dayjs(data['startTime']);
+        }
+        data.elements.sort(function(a, b){
+            return a.id - b.id;
+        });
+        var time_list = [startTime]
+        console.log(data);
+        var old_time = startTime;
+        data['elements'].forEach(function (item, index) {
+            item.timeStamp = old_time.add(item.duration,'seconds')
+            old_time = item.timeStamp
+        });
+        console.log(data);
+
+        console.log(time_list.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1)))
+
+        startJqueryTimer(data);
+    }
+
+    function startJqueryTimer(startTime) {
+        var element = startTime['elements'].shift()
+        var elemId = uniqId()
+        var timer_name = $("<div></div>").text(element.name);
+        var timer_gui = $("<div></div>").text("00:00 ").attr('id', elemId);
+        $("#Timers").after(timer_gui).after(timer_name);
+
+        //console.log("Elements2",(['timeStamp'])
+        $(timer_gui).countdown({
+            until: new Date((element['timeStamp'])),
+            compact: true, format: 'MS',
+            onExpiry: function expired() {
+                $(timer_gui).remove();
+                $(timer_name).remove();
+                startJqueryTimer(startTime)
+            },
+            alwaysExpire: true
+        });
+    }
+
+    function uniqId() {
+        return Math.round(new Date().getTime() + (Math.random() * 100));
+    }
+</script>
+
+</body>
+</html>
