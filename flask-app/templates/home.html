@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Cover Template for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet"
+          href="{{url_for('.static', filename='css/cover.css')}}">
+
+</head>
+
+<body class="text-center">
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column  w-75 ">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">Cover</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <div id="wo" style="display:none;">Workout</div>
+        <div id="intro" style="display:none;">Intro</div>
+        <div id="warmup" style="display:none;">Warmup</div>
+        <div id="drink" style="display:none;">Drink</div>
+        <div id="wo_break" style="display:none;">Break</div>
+        <button id="start" type="button" class="btn btn-primary">Start</button>
+        <div id="wo_bar" class="progress">
+            <div class="progress-bar" role="progressbar" style="" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <body>
+        <div><span id="time">05:00</span></div>
+        <audio id='sound' src="{{url_for('.static', filename='sounds/AirHorn-SoundBible.com-964603082.wav')}}">
+            <p>If you are reading this, it is because your browser does not support the audio element.     </p>
+        </audio>
+    </main>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+    </footer>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{url_for('.static', filename='libs/easytimer.min.js')}}"></script>
+
+<script>
+    var sequence = []
+    var counter = 0;
+    $(document).ready(function(){
+        fetch(`${window.origin}/workouts`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                sequence = data;
+            });
+
+        $("#wo_bar").hide()
+
+        $('#start').on('click', function(event) {
+            event.preventDefault(); // To prevent following the link (optional)
+            var fiveMinutes = 60 * 0.1,
+                display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
+            $(this).hide();
+            $("#wo_bar").show();
+        });
+
+
+    });
+
+
+    function showElement(counter) {
+
+        var intro = $('#intro');var warmup = $('#warmup');var  wo_break = $('#wo_break');var drink = $('#drink');var wo = $('#wo');
+
+        var elem = sequence[counter];
+        if(elem == 'intro'){
+            intro.show()
+            warmup.hide()
+            wo_break.hide()
+            drink.hide()
+            wo.hide()
+        }
+        if(elem == 'wo'){
+            intro.hide()
+            warmup.hide()
+            wo_break.hide()
+            drink.hide()
+            wo.show()
+        }
+        if(elem == 'wo_break'){
+            intro.hide()
+            warmup.hide()
+            wo_break.show()
+            drink.hide()
+            wo.hide()
+        }
+        if(elem == 'warmup'){
+            intro.hide()
+            warmup.show()
+            wo_break.hide()
+            drink.hide()
+            wo.hide()
+        }
+        if(elem == 'drink'){
+            intro.hide()
+            warmup.hide()
+            wo_break.hide()
+            drink.show()
+            wo.hide()
+        }
+        var pcg = (counter/sequence.length)*100;
+        $('.progress-bar').css({"width": pcg+'%'});
+    }
+
+
+    function startTimer(duration, display) {
+        showElement(counter)
+
+        var timer = duration, minutes, seconds;
+        var id = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                $('#sound')[0].play();
+                counter = counter + 1;
+                showElement(counter)
+                timer = duration;
+                if(counter==sequence.length){
+
+                    $('#time').text("!!! Workout done !!!")
+                    clearInterval(id);
+                }
+            }
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
