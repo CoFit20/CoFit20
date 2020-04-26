@@ -56,9 +56,9 @@
     {
       "id": 8,
       "heading": "Rest",
-      "name": "Up Next: !",
+      "name": "Up Next: Inner Sole Tap",
       "duration": 10,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Rest1.mp4"
 },
     {
       "id": 9,
@@ -71,9 +71,9 @@
     {
       "id": 10,
       "heading": "Rest",
-      "name": "Up Next: !",
+      "name": "Up Next: Squat & Knee Tap",
       "duration": 10,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Rest1.mp4"
 },
     {
       "id": 11,
@@ -85,9 +85,9 @@
     {
       "id": 12,
       "heading": "Rest",
-      "name": "Up Next: !",
+      "name": "Up Next: Frog Squats",
       "duration": 10,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Rest1.mp4"
 },
 
     {
@@ -100,9 +100,9 @@
     {
       "id": 14,
       "heading": "Rest",
-      "name": "Up Next: !",
+      "name": "Up Next: 10 High Knee & 3 Tuck Jumps",
       "duration": 10,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Rest1.mp4"
 },
     {
       "id": 15,
@@ -114,9 +114,9 @@
     {
       "id": 16,
       "heading": "Rest",
-      "name": "Up Next: !",
+      "name": "Up Next: Crunches",
       "duration": 10,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Rest1.mp4"
 },
     {
       "id": 17,
@@ -129,9 +129,9 @@
     {
       "id": 18,
       "heading": "Refill Water",
-      "name": "Up Next: !",
+      "name": "Up Next: Fast Feet & Jump",
       "duration": 45,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/WaterRefill.mp4"
 }
   ]
 }
