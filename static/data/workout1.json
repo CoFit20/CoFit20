@@ -20,7 +20,7 @@
       "heading": "Warm Up",
       "name": "Jumping Jacks",
       "duration": 25,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/JumpingJack.mp4"
 },
 
 {
@@ -35,7 +35,7 @@
       "heading": "Warm Up",
       "name": "5 Shoulder Circles & Windmill",
       "duration": 25,
-      "gifpath": "static/movie/SquatPulses.mp4"
+      "gifpath": "static/movie/ShouldrCircles.mp4"
 },
 
 
@@ -65,7 +65,7 @@
       "heading": "Workout Time",
       "name": "Burpees",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/Burpee.mp4"
 },
 
     {
@@ -80,7 +80,7 @@
       "heading": "Workout Time",
       "name": "Mountain Climber",
       "duration": 40,
-      "gifpath": "static/movie/Plank.mp4"
+      "gifpath": "static/movie/MountainClimber.mp4"
     },
     {
       "id": 12,
@@ -95,7 +95,7 @@
       "heading": "Workout Time",
       "name": "Sumo Squat",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/SumoSquat.mp4"
 },
     {
       "id": 14,
@@ -109,7 +109,7 @@
       "heading": "Workout Time",
       "name": "Jumping Lunges",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/PlyoLunges.mp4"
 },
     {
       "id": 16,

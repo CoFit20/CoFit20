@@ -20,7 +20,7 @@
       "heading": "Warm Up",
       "name": "Jumping Jacks",
       "duration": 25,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/JumpingJack.mp4"
 },
 
 {
@@ -35,7 +35,7 @@
       "heading": "Warm Up",
       "name": "5 Shoulder Circles & Windmill",
       "duration": 25,
-      "gifpath": "static/movie/SquatPulses.mp4"
+      "gifpath": "static/movie/ShouldrCircles.mp4"
 },
 
 
@@ -51,7 +51,7 @@
       "heading": "Workout Time",
       "name": "Fast Feet & Jump",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/FastFeetJump.mp4"
 },
     {
       "id": 8,
@@ -65,7 +65,7 @@
       "heading": "Workout Time",
       "name": "Inner Sole Tap",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/InnerSoleTap.mp4"
 },
 
     {
@@ -80,7 +80,7 @@
       "heading": "Workout Time",
       "name": "Squat & Knee Tap",
       "duration": 40,
-      "gifpath": "static/movie/Plank.mp4"
+      "gifpath": "static/movie/SquatKneeTap.mp4"
     },
     {
       "id": 12,
@@ -95,7 +95,7 @@
       "heading": "Workout Time",
       "name": "Frog Squats",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/FrogSquat.mp4"
 },
     {
       "id": 14,
@@ -109,7 +109,7 @@
       "heading": "Workout Time",
       "name": "10 High Knee & 3 Tuck Jumps",
       "duration": 40,
-      "gifpath": "static/movie/Crunches.mp4"
+      "gifpath": "static/movie/HighKneeTuckJump.mp4"
 },
     {
       "id": 16,
@@ -123,7 +123,7 @@
       "heading": "Workout Time",
       "name": "Crunches",
       "duration": 40,
-      "gifpath": "static/movie/PushUp.mp4"
+      "gifpath": "static/movie/Crunches.mp4"
 },
 
     {
