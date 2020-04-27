@@ -80,12 +80,30 @@ function createCarousel(data) {
         }
         elem.expired = false;
         elem.carousel_index = index-expired_count;
-            $('<div class="carousel-item"><h2 id="name-'+elem.id+'">'+elem.name+'</h2>' +
-            '<video onloadeddata="this.play();"  playsinline loop muted preload autoplay>\n' +
-            '    <source src="'+elem.gifpath+'" type="video/mp4" />\n' +
-            '    Your browser does not support the video tag or the file format of this video.\n' +
-            '</video>'+
-            '<div id=timer-'+elem.id+'></div>').appendTo('.carousel-inner');
+
+        var content = null;
+        console.log(elem.gifpath)
+        if(elem.gifpath==""){
+            var wrapper = $('<div class="carousel-item"></div>');
+            var ol = $("<ol class='list-group'></ol>")
+            var lst = elem.name;
+            $.each (lst, function(index,elem) {
+                ol.append("<li style='background-color: #555 ' class=\"list-group-item\"><b>"+elem+"</b></li>");
+
+            });
+            wrapper.append(ol)
+            wrapper.append('<div id=timer-'+elem.id+'></div>')
+            content = wrapper;
+        }else {
+           content = $('<div class="carousel-item"><h2 id="name-'+elem.id+'">'+elem.name+'</h2>' +
+                '<video onloadeddata="this.play();"  playsinline loop muted preload autoplay>\n' +
+                '    <source src="'+elem.gifpath+'" type="video/mp4" />\n' +
+                '    Your browser does not support the video tag or the file format of this video.\n' +
+                '</video>'+
+                '<div id=timer-'+elem.id+'></div>')
+        }
+
+            content.appendTo('.carousel-inner');
         $('<li data-targe="#carousel" data-slide-to="' + elem.id + '"></li>').appendTo('.carousel-indicators');
     })
     // ------------    SHOW CAROUSEL    -------------
@@ -123,7 +141,7 @@ function startJqueryTimer(startTime) {
 
     timer_gui.countdown({
         until: new Date((element['timeStamp'])),
-        compact: true, format: 'DHMS',
+        compact: true, format: 'dhMS',
         onExpiry: function expired() {
             console.log("expired"+element.id)
             $('#heading').text('-');
