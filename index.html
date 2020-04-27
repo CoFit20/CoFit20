@@ -65,8 +65,8 @@
 <!--                                <a id="next-0-share-fb"><i class="fab fa-facebook-square fa-2x"></i></a>-->
 <!--                                    <a id="next-0-share-ig"><i class="fab fa-instagram-square fa-2x "></i></a>-->
 <!--                                <a id="next-0-share-twitter"><i class="fab fa-twitter-square fa-2x"></i></a>-->
-                                <div>
-                                <input class="row" id="next-0-link"/>
+                                <div class="col-sm-10">
+                                <input class="row " id="next-0-link"/>
                                 <button class="btn clipboard-button" data-clipboard-target="#next-0-link" data-toggle="tooltip" data-placement="bottom" title="Copy to Clipboard">
                                     <i class="fa fa-share-square fa_custom"></i>
                                 </button>
@@ -124,23 +124,18 @@
 <script src="./static/libs/clipboard.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        var next_monday = new Date();
-        next_monday.setDate(next_monday.getDate() + (1 + 7 - next_monday.getDay()) % 7);
-        console.log(next_monday);
-        var next_wednesday = new Date();
-        next_wednesday.setDate(next_wednesday.getDate() + (3 + 7 - next_wednesday.getDay()) % 7);
-        console.log(next_wednesday);
-        var next_friday = new Date();
-        next_friday.setDate(next_friday.getDate() + (5 + 7 - next_friday.getDay()) % 7);
-        console.log(next_friday);
+        var last5min =GFG_Fun2();
+        var last10min = dayjs(last5min).add(5,'minutes');
+        var last15min = dayjs(last5min).add(10,'minutes');
 
-        var time_list = [next_monday,next_wednesday,next_friday]
+
+        var time_list = [last5min,last10min,last15min]
         time_list.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
         console.log(time_list)
         $.each(time_list, function (idx,time) {
-            time.setHours(11)
-            time.setMinutes(0)
-            time.setSeconds(0)
+            // time.setHours(11)
+            // time.setMinutes(0)
+            // time.setSeconds(0)
             $("#next-"+idx).text(dayjs(time).toString());
             var share_link = window.location.hostname+'/workout.html?timestamp='+time.toISOString();
             $("#next-"+idx).attr('href','workout.html?timestamp='+time.toISOString());
@@ -158,6 +153,14 @@
 
     function createJsonForTimestamp(timestamp) {
 
+    }
+
+    function GFG_Fun2() {
+        var date = new Date();
+        // ms in 5 minutes.
+        var coff = 1000 * 60 * 5;
+        return new Date(
+            Math.ceil(date / coff) * coff);
     }
 
 

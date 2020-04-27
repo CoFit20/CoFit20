@@ -29,10 +29,27 @@ $(document).ready(function(){
 };
                 console.log("Timestamp found!!")
                 data.startTime = dayjs(timestamp);
-                data.elements.unshift(wait);
+                //data.elements.unshift(wait);
             }else{
                 data.startTime = 'now';
             }
+
+            var startTime = null;
+            if(data.startTime!="now"){
+                startTime = dayjs(data.startTime)
+            }else{
+                startTime = dayjs(Date.now())
+            }
+            data.elements.sort(function(a, b){
+                return a.id - b.id;
+            });
+
+            var time_list = [startTime]
+            var old_time = startTime;
+            data['elements'].forEach(function (item, index) {
+                item.timeStamp = old_time.add(item.duration,'seconds')
+                old_time = item.timeStamp
+            });
 
             createCarousel(data);
             parseResults(data);
@@ -53,8 +70,17 @@ $(document).ready(function(){
 });
 
 function createCarousel(data) {
+    var expired_count = 0;
     $.each (data['elements'], function(index,elem) {
-        $('<div class="carousel-item"><h2 id="name-'+elem.id+'">'+elem.name+'</h2>' +
+        if(dayjs(elem.timeStamp).isBefore(dayjs(Date.now()))) {
+            console.log("expired");
+            elem.expired = true;
+            expired_count = expired_count +1;
+            return;
+        }
+        elem.expired = false;
+        elem.carousel_index = index-expired_count;
+            $('<div class="carousel-item"><h2 id="name-'+elem.id+'">'+elem.name+'</h2>' +
             '<video onloadeddata="this.play();"  playsinline loop muted preload autoplay>\n' +
             '    <source src="'+elem.gifpath+'" type="video/mp4" />\n' +
             '    Your browser does not support the video tag or the file format of this video.\n' +
@@ -72,45 +98,38 @@ function createCarousel(data) {
 
 
 function parseResults(data) {
-    var startTime = null;
-    if(data.startTime!="now"){
-        startTime = dayjs(data.startTime)
-    }else{
-       startTime = dayjs(Date.now())
-    }
-    data.elements.sort(function(a, b){
-        return a.id - b.id;
-    });
-
-    var time_list = [startTime]
-    var old_time = startTime;
-    data['elements'].forEach(function (item, index) {
-        item.timeStamp = old_time.add(item.duration,'seconds')
-        old_time = item.timeStamp
-    });
-
     startJqueryTimer(data);
 }
 
 function startJqueryTimer(startTime) {
-    console.log(startTime['elements'].length)
+    console.log(startTime);
     if(startTime['elements'].length==0){
         $("#content").empty()
         $("#content").html('<h1>!!! Workout over !!!!</h1>')
         return
     }
+
     var element = startTime['elements'].shift()
+    if(element.expired){
+        console.log("Element is expired. Dont start timer")
+        $(".carousel.active").empty()
+        $('.carousel').carousel(element.carousel_index)
+        startJqueryTimer(startTime);
+        return;
+    }
     $('#heading').text(element.heading);
     var elemId = uniqId()
-    var timer_gui = $("#timer-"+element.id).text("00:00 ").css('font-size', 'xx-large');
+    var timer_gui = $("#timer-"+element.id).text("00:00").css('font-size', 'xx-large');
 
     timer_gui.countdown({
         until: new Date((element['timeStamp'])),
         compact: true, format: 'DHMS',
         onExpiry: function expired() {
+            console.log("expired"+element.id)
             $('#heading').text('-');
             $(".carousel.active").empty()
-            $('.carousel').carousel('next');
+            $('.carousel').carousel(element.carousel_index+1);
+            console.log('carousel go to next')
             startJqueryTimer(startTime);
         },
         alwaysExpire: true

@@ -41,7 +41,7 @@ body {
 .cover-container {
     max-width: 45em;
 }
-
+input[type=text] { width: 100%; box-sizing: border-box; height: 28px; }
 
 /*
  * Header
