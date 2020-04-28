@@ -10,8 +10,11 @@ $(document).ready(function(){
         workoutFile = "workout1.json"
     }
     //console.log(jsonObject);
-    fetch('./static/data/'+workoutFile)
+    fetch('./static/data/'+workoutFile,{cache: "no-store"})
         .then((response) => {
+            var date = response.headers.get('Date');
+            console.log(date.toString())
+            calcOffset(date);
             return response.json();
         })
         .then((data) => {
@@ -38,7 +41,7 @@ $(document).ready(function(){
             if(data.startTime!="now"){
                 startTime = dayjs(data.startTime)
             }else{
-                startTime = dayjs(Date.now())
+                startTime = dayjs(getServerTime())
             }
             data.elements.sort(function(a, b){
                 return a.id - b.id;
@@ -72,7 +75,7 @@ $(document).ready(function(){
 function createCarousel(data) {
     var expired_count = 0;
     $.each (data['elements'], function(index,elem) {
-        if(dayjs(elem.timeStamp).isBefore(dayjs(Date.now()))) {
+        if(dayjs(elem.timeStamp).isBefore(dayjs(getServerTime()))) {
             console.log("expired");
             elem.expired = true;
             expired_count = expired_count +1;
@@ -82,7 +85,6 @@ function createCarousel(data) {
         elem.carousel_index = index-expired_count;
 
         var content = null;
-        console.log(elem.gifpath)
         if(elem.gifpath==""){
             var wrapper = $('<div class="carousel-item"></div>');
             var ol = $("<ol class='list-group'></ol>")
@@ -152,6 +154,23 @@ function startJqueryTimer(startTime) {
         },
         alwaysExpire: true
     });
+}
+var offset = 0;
+function calcOffset(dateStr) {
+
+    var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+    var localMillisUTC = Date.parse(new Date().toUTCString());
+
+    offset = serverTimeMillisGMT -  localMillisUTC;
+    console.log(offset)
+}
+
+function getServerTime() {
+    var date = new Date();
+
+    date.setTime(date.getTime() + offset);
+
+    return date;
 }
 
 function uniqId() {
