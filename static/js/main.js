@@ -12,9 +12,9 @@ $(document).ready(function(){
     //console.log(jsonObject);
     fetch('./static/data/'+workoutFile,{cache: "no-store"})
         .then((response) => {
-            var date = response.headers.get('Date');
-            console.log(date.toString())
-            calcOffset(date);
+            var date_str = response.headers.get('Date');
+            calcOffset(date_str)
+
             return response.json();
         })
         .then((data) => {
@@ -157,12 +157,8 @@ function startJqueryTimer(startTime) {
 }
 var offset = 0;
 function calcOffset(dateStr) {
-
-    var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
-    var localMillisUTC = Date.parse(new Date().toUTCString());
-
-    offset = serverTimeMillisGMT -  localMillisUTC;
-    console.log(offset)
+    offset = dayjs(Date.now()).diff(dayjs(dateStr))
+    console.log("Offset Server->local "+offset)
 }
 
 function getServerTime() {
