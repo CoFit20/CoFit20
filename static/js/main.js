@@ -10,11 +10,8 @@ $(document).ready(function(){
         workoutFile = "workout1.json"
     }
     //console.log(jsonObject);
-    fetch('./static/data/'+workoutFile,{cache: "no-store"})
+    fetch('./static/data/'+workoutFile)
         .then((response) => {
-            var date_str = response.headers.get('Date');
-            calcOffset(date_str)
-
             return response.json();
         })
         .then((data) => {
@@ -23,16 +20,10 @@ $(document).ready(function(){
             if(searchParams.has('timestamp')) {
                 let timestamp = searchParams.get('timestamp')
 
-                var wait = {
-                    "id": 0,
-                    "heading": "Wait for Group Session",
-                    "name": "Session will start soon",
-                    "duration": 10,
-                    "gifpath": "static/movie/Crunches.mp4"
-};
+
                 console.log("Timestamp found!!")
                 data.startTime = dayjs(timestamp);
-                //data.elements.unshift(wait);
+
             }else{
                 data.startTime = 'now';
             }
@@ -41,7 +32,7 @@ $(document).ready(function(){
             if(data.startTime!="now"){
                 startTime = dayjs(data.startTime)
             }else{
-                startTime = dayjs(getServerTime())
+                startTime = dayjs(Date.now())
             }
             data.elements.sort(function(a, b){
                 return a.id - b.id;
@@ -75,7 +66,7 @@ $(document).ready(function(){
 function createCarousel(data) {
     var expired_count = 0;
     $.each (data['elements'], function(index,elem) {
-        if(dayjs(elem.timeStamp).isBefore(dayjs(getServerTime()))) {
+        if(dayjs(elem.timeStamp).isBefore(dayjs(Date.now()))) {
             console.log("expired");
             elem.expired = true;
             expired_count = expired_count +1;
@@ -85,6 +76,7 @@ function createCarousel(data) {
         elem.carousel_index = index-expired_count;
 
         var content = null;
+        console.log(elem.gifpath)
         if(elem.gifpath==""){
             var wrapper = $('<div class="carousel-item"></div>');
             var ol = $("<ol class='list-group'></ol>")
@@ -154,19 +146,6 @@ function startJqueryTimer(startTime) {
         },
         alwaysExpire: true
     });
-}
-var offset = 0;
-function calcOffset(dateStr) {
-    offset = dayjs(Date.now()).diff(dayjs(dateStr))
-    console.log("Offset Server->local "+offset)
-}
-
-function getServerTime() {
-    var date = new Date();
-
-    date.setTime(date.getTime() + offset);
-
-    return date;
 }
 
 function uniqId() {
