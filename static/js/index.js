@@ -15,7 +15,7 @@ type="text/javascript">
 
 
             //    
-            var time_list = [next_wednesday]
+            var time_list = [next_friday]
             time_list.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
             console.log(time_list)
 
